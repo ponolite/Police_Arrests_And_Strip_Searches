@@ -48,9 +48,9 @@ cleaned_arrests_strip_data <-
                                  reason_weapons = c("None"),
                                  reason_has_evidence = c("None")))
 
-# Replace all "XX" and "None" from the columns arrest_loc_div and items_found with NA and 0 respectively to make the data processing easier later on
+# Replace all "XX" and "None" from the columns arrest_loc_div and items_found with NA and NA respectively to make the data processing more efficient later on
 # Code referenced from https://www.youtube.com/watch?v=g1eppE60J5g
-cleaned_arrests_strip_data$items_found[cleaned_arrests_strip_data$items_found == "None"] <- 0
+cleaned_arrests_strip_data$items_found[cleaned_arrests_strip_data$items_found == "None"] <- NA
 cleaned_arrests_strip_data$arrest_loc_div[cleaned_arrests_strip_data$arrest_loc_div == "XX"] <- NA
 
 

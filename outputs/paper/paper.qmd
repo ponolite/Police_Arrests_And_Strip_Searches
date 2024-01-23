@@ -1,5 +1,5 @@
 ---
-title: "My title"
+title: "An Intersectional Analysis of Police Arrests "
 subtitle: "My subtitle if needed"
 author: 
   - First author
@@ -11,6 +11,19 @@ abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
 format: pdf
 number-sections: true
 bibliography: references.bib
+---
+
+---
+title: "Do More Subdivisions in Wards Increase Voter Turnout? An Analysis of the 2022 Toronto Municipal Election"
+author: "Inessa De Angelis"
+thanks: "Code and data from this analysis are available at: https://github.com/InessaDeAngelis/Toronto_Elections" 
+date: "today"
+date-format: "long" 
+abstract: "The 2022 Toronto Municipal Election witnessed the lowest voter turnout in the city’s history since amalgamation in 1997, with voter turnout on a ward-by-ward basis ranging from 22% to 38%. Using data from OpenDataToronto, this paper disproves the hypothesis that having more subdivisions within a ward bolsters voter turnout. This paper reveals that more subdivisions within a ward does not necessarily correlate to a higher voter turnout."
+format: pdf
+toc: true
+number-sections: true
+bibliography: ref.bib
 ---
 
 ```{r}

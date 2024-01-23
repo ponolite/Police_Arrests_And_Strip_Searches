@@ -16,7 +16,12 @@ library(tidyverse)
 #### Download data ####
 #From https://open.toronto.ca/dataset/police-race-and-identity-based-data-collection-arrests-strip-searches/
 
+#Datasets on opendatatoronto has several different datasets within it.
+#We must look at a package obtained from the website with a specific code
+#in order to see these specific datasets within the main dataset.
+
 # download data package 
+
 
 package <- show_package("police-race-and-identity-based-data-collection-arrests-strip-searches")
 package

@@ -1,30 +1,15 @@
 ---
-title: "An Intersectional Analysis of Police Arrests "
-subtitle: "My subtitle if needed"
-author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
+title: "An Alarming Rate of Gendered and Racialized Police Strip Searches in the Toronto Municipal, 2020-2021"
+author: "Quang Mai"
+thanks: "Code and data are available at: https://github.com/ponolite/Police_Arrests_and_Strip_Searches/tree/main"
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "Police enforcement, particularly arrests and strip searches, has been a topic of great contention during the COVID-19 pandemic. The question commonly raised was how certain demographics are more likely to undergo arrests and strip searches than others, and why has this skewed power dynamics been maintained for so long. Data then was gathered from Open Data Toronto to assess the correlation between strip searches and the racial and gender identities of arrested 'suspects' in the Toronto Municipal from 2020 to 2021. This analysis would enable us to rethink the modern form of policing, how it transpires in times of crisis and critically affects people of marginalized identities." WHAT WAS FOUND!!
 format: pdf
 number-sections: true
 bibliography: references.bib
 ---
 
----
-title: "Do More Subdivisions in Wards Increase Voter Turnout? An Analysis of the 2022 Toronto Municipal Election"
-author: "Inessa De Angelis"
-thanks: "Code and data from this analysis are available at: https://github.com/InessaDeAngelis/Toronto_Elections" 
-date: "today"
-date-format: "long" 
-abstract: "The 2022 Toronto Municipal Election witnessed the lowest voter turnout in the city’s history since amalgamation in 1997, with voter turnout on a ward-by-ward basis ranging from 22% to 38%. Using data from OpenDataToronto, this paper disproves the hypothesis that having more subdivisions within a ward bolsters voter turnout. This paper reveals that more subdivisions within a ward does not necessarily correlate to a higher voter turnout."
-format: pdf
-toc: true
-number-sections: true
-bibliography: ref.bib
----
 
 ```{r}
 #| include: false
@@ -32,16 +17,20 @@ bibliography: ref.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
+library(knitr)
+library(opendatatoronto)
 ```
 
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. 
+In recent times, the Ford government has been at the forefront of public push-back, due to their revisions of strip search laws in Toronto under the Ministry of Correctional Services Act, R.S.O. 1990, c. M.22. Addressed by the Canadian Civil Liberties Association, the revisions "fall short of what is needed to ensure that prisoners are treated with basic respect" (@ontarioStripLaw). By definition, strip search is a police enforcement, which entails removing some or all articles of clothing to visually inspect a person's body and see if they harbor any items like weapons or drugs (@torontoPolice). Long considered one of the most dehumanizing policing acts, strip search often requires 'suspects' to bend over to have their private parts examined. Surprisingly, while contended as an alarming issue, little has been done to contribute to the legal and political conversations around strip searches as a form of police power abuse in Toronto. This is especially relevant considering the city's racialized and gendered demographics, and how strip searches most likely affect these social groups (@stripSearchOpEd). It's evermore relevant looking back at strip searches under the context of the global pandemic COVID-19 during 2020 and 2021, where much of Toronto's diverse population is left vulnerable when interacting with police forces (@covidStripSearch).
 
-The remainder of this paper is structured as follows. @sec-data....
+This paper thus leverages gender and racial identities of 'suspects' arrested by Toronto police from 2020 to 2021, and assesses if there is a correlation between racialized and gendered Toronto residents and strip searching. The converging social identities of gender and race may prove to be a empowering source to the 'suspects', but a factor of oppression to the police forces. Therefore, this paper aims to contribute to the conversation around strip searching of the vulnerable population, and aims to be a form of data activism to counter to injustices related to police power abuse under the subtext of COVID-19. To accordingly analyze, I first map out the distribution of Toronto police arrests by race and gender from 2020 to 2021 using bar graphs and time plots. Then with each graph, and for each variable of race and gender, the distribution bars would be sectioned into including strip searches or not to visualize the statistics for each racial and gender identities identified. With that,
 
+analyze the distribution of gender and racial identities affected by strip searches [CONCLUSION!] To accordingly come to this conclusion, 
+
+Structurally, this paper is organized into the following sections: Data, Results, Discussion, and Conclusion. First, the Data section divulges the nature of the dataset obtained from Open Data Toronto and how data cleaning and analysis took place (@torontoPolice). Then, all the trends and findings I discovered are shown in the Results section, while the Discussion section further assesses these findings. Ultimately, the Conclusion section summarizes the paper's main insights. In additon, it's worth noting that the data was sourced from Open Data Toronto and Toronto Police Services themselves. Thus, this dataset may already contain much racial and gender bias from the very source that this paper is questioning: the Toronto Police Services and its enforcement of strip searching (@stripSearchOpEd). Then, the findings presented might not fully encapsulate the actual landscape of strip searching in Toronto from 2020 to 2021, yet it's still worth looking at due the alarming precedents of police power abuse.
 
 
 # Data {#sec-data}
@@ -84,36 +73,6 @@ analysis_data |>
 ```
 
 Talk way more about it. 
-
-
-
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
-
-## Model set-up
-
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
-
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
 
 
 # Results

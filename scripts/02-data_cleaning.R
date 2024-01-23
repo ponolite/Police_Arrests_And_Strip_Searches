@@ -23,6 +23,7 @@ library(naniar)
 #### Clean data ####
 # Code of function replace_with_na referenced from https://tidyr.tidyverse.org/reference/replace_na.html
 
+# Clean from the raw dataset
 raw_police_arrests_strip_data <- read_csv("inputs/data/raw_police_arrests_strip_data.csv")
 
 cleaned_arrests_strip_data <-
@@ -54,6 +55,20 @@ cleaned_arrests_strip_data <-
 cleaned_arrests_strip_data$items_found[cleaned_arrests_strip_data$items_found == "None"] <- NA
 cleaned_arrests_strip_data$arrest_loc_div[cleaned_arrests_strip_data$arrest_loc_div == "XX"] <- NA
 
+# Clean from the cleaned dataset, to keep the a dataset of variables like event_id, race, gender, age_group, strip search and items_found
+
+cleaned_race_gender_data = 
+  cleaned_arrests_strip_data |>
+  select(event_id, race, gender, age_group, strip_search, items_found)
+
+# Clean from the cleaned dataset, to keep a dataset of variables like reasons for strip searching
+
+cleaned_search_reasons_data = 
+  cleaned_arrests_strip_data |>
+  select(event_id, reason_injury,	reason_escape, reason_weapons, reason_has_evidence, strip_search, items_found) |>
+  filter(!is.na(reason_injury) | !is.na(reason_escape) | !is.na(reason_weapons) | !is.na(reason_has_evidence))
 
 #### Save data ####
 write_csv(cleaned_arrests_strip_data,"inputs/data/cleaned_arrests_strip_data.csv")
+write_csv(cleaned_race_gender_data,"inputs/data/cleaned_race_gender_data.csv")
+write_csv(cleaned_search_reasons_data,"inputs/data/cleaned_search_reasons_data.csv")

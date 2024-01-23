@@ -47,6 +47,21 @@ simulated_data <-
 
 simulated_data
 
+#add a new items_found column to those events with strip search, with replacement, 32717 times (32717 is based on the set.seed() number)
+
+set.seed(56)
+
+simulated_data_items <-
+  simulated_data |>
+  filter(strip_search == "Yes") |>
+  mutate(
+    "items_found" = sample(
+      x = c("Yes", "No"),
+      size = 32717,
+      replace = TRUE
+    )
+  )
+
 #### Summarize the victim's gender identity of each police arrest event ####
 
 set.seed(56)

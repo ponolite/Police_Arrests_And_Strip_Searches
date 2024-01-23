@@ -59,7 +59,7 @@ cleaned_arrests_strip_data$arrest_loc_div[cleaned_arrests_strip_data$arrest_loc_
 
 cleaned_race_gender_data = 
   cleaned_arrests_strip_data |>
-  select(event_id, race, gender, age_group, strip_search, items_found)
+  select(event_id, race, gender, strip_search, items_found)
 
 # Clean from the cleaned dataset, to keep a dataset of variables like reasons for strip searching
 

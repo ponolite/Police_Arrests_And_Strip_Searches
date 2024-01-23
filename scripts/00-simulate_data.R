@@ -19,6 +19,8 @@ library(janitor)
 #### Simulate the victim's gender, racial identity and the strip-search nature of each police arrest event ####
 # Code referenced from from: https://tellingstorieswithdata.com/02-drinking_from_a_fire_hose.html#simulate
 
+set.seed(56) #ensure simulated data's reproducibility
+
 simulated_data <-
   tibble(
     #use 1 through 1000 to represent each event
@@ -47,27 +49,39 @@ simulated_data
 
 #### Summarize the victim's gender identity of each police arrest event ####
 
+set.seed(56)
+
 gender_per_event = 
   simulated_data |>
   group_by(sex, strip_search) |>
   count() |>
   rename(number_of_arrests = n)
+
+gender_per_event
   
 #### Summarize the victim's racial identity of each police arrest event ####
+
+set.seed(56)
 
 race_per_event = 
   simulated_data |>
   group_by(race, strip_search) |>
   count() |>
   rename(number_of_arrests = n)
+
+race_per_event
   
 #### Summarize whether each police arrest event contains strip search ####
+
+set.seed(56)
 
 strip_search_per_event = 
   simulated_data |>
   group_by(strip_search) |>
   count() |>
   rename(number_of_arrests = n)
+
+strip_search_per_event
 
 
 #### Create histograms and graphs ####
@@ -108,7 +122,6 @@ gender_per_event |>
 
 
 
-
 #### Data Validation ####
 
 # Code referenced from: https://tellingstorieswithdata.com/02-drinking_from_a_fire_hose.html
@@ -130,3 +143,8 @@ simulated_data$race |> unique() |> length() == 9
 
 # Check that there are exactly 3 gender identities identified #
 simulated_data$sex |> unique() |> length() == 3
+
+# Check that there are exactly 2 options for strip searches #
+simulated_data$strip_search |> unique() |> length() == 2
+
+

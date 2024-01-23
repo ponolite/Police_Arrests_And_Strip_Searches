@@ -43,5 +43,7 @@ cleaned_arrests_strip_data <-
                                  reason_escape = c("None"),
                                  reason_weapons = c("None"),
                                  reason_has_evidence = c("None")))
+
+
 #### Save data ####
 write_csv(cleaned_arrests_strip_data,"inputs/data/cleaned_arrests_strip_data.csv")

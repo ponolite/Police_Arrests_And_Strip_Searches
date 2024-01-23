@@ -23,24 +23,24 @@ set.seed(56) #ensure simulated data's reproducibility
 
 simulated_data <-
   tibble(
-    #use 1 through 1000 to represent each event
-    "event" = 1:1000,
-    #randomly pick a race identified from the dataset, with replacement, 1000 times
+    #use 1 through 65276 to represent each event
+    "event" = 1:65276,
+    #randomly pick a race identified from the dataset, with replacement, 65276 times
     "race" = sample(
       x = c("White", "Unknown or Legacy", "Black", "South Asian", "Indigenous", "Middle-Eastern", "Latino", "East/Southeast Asian", "None"),
-      size = 1000,
+      size = 65276,
       replace = TRUE
     ),
-    #randomly pick one gender identity identified from the dataset, with replacement, 1000 times
+    #randomly pick one gender identity identified from the dataset, with replacement, 65276 times
     "sex" = sample(
       x = c("Male", "Female", "Unidentified"),
-      size = 1000,
+      size = 65276,
       replace = TRUE
     ),
-    #randomly pick whether the event includes strip search, with replacement, 1000 times
+    #randomly pick whether the event includes strip search, with replacement, 65276 times
     "strip_search" = sample(
       x = c("Yes", "No"),
-      size = 1000,
+      size = 65276,
       replace = TRUE
     )
 )
@@ -126,11 +126,11 @@ gender_per_event |>
 
 # Code referenced from: https://tellingstorieswithdata.com/02-drinking_from_a_fire_hose.html
 
-# Check that there are between 1 and 1000 events of police arrests and strip searches #
+# Check that there are between 1 and 65276 events of police arrests and strip searches #
 simulated_data$event |> min() == 1
-simulated_data$event |> max() == 1000
+simulated_data$event |> max() == 65276
 
-# Check that there are no more than 1000 events #
+# Check that there are no more than 65276 events #
 simulated_data |>
   group_by(event) |>
   count() |>

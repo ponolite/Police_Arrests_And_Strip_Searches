@@ -4,7 +4,7 @@ author: "Quang Mai"
 thanks: "Code and data are available at: https://github.com/ponolite/Police_Arrests_and_Strip_Searches/tree/main"
 date: today
 date-format: long
-abstract: "Police enforcement, particularly arrests and strip searches, has been a topic of great contention during the COVID-19 pandemic. The question commonly raised was how certain demographics are more likely to undergo arrests and strip searches than others, and why has this skewed power dynamics been maintained for so long. Data then was gathered from Open Data Toronto to assess the correlation between strip searches and the racial and gender identities of arrested 'suspects' in the Toronto Municipal from 2020 to 2021. This analysis would enable us to rethink the modern form of policing, how it transpires in times of crisis and critically affects people of marginalized identities." WHAT WAS FOUND!!
+abstract: "Police enforcement, particularly arrests and strip searches, has been a topic of great contention during the COVID-19 pandemic. The question commonly raised was how certain demographics are more likely to undergo arrests and strip searches than others, and why has this skewed power dynamics been maintained for so long. Data then was gathered from Open Data Toronto to assess the correlation between strip searches and the racial and gender identities of arrested 'suspects' in the Toronto Municipal from 2020 to 2021. This analysis would enable us to rethink the modern form of policing, how it transpires in times of crisis and critically affects people of marginalized identities." 
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -22,7 +22,7 @@ library(opendatatoronto)
 ```
 
 
-# Introduction
+## Introduction
 
 In recent times, the Ford government has been at the forefront of public push-back, due to their revisions of strip search laws in Toronto under the Ministry of Correctional Services Act, R.S.O. 1990, c. M.22. Addressed by the Canadian Civil Liberties Association, the revisions "fall short of what is needed to ensure that prisoners are treated with basic respect" (@ontarioStripLaw). By definition, strip search is a police enforcement, which entails removing some or all articles of clothing to visually inspect a person's body and see if they harbor any items like weapons or drugs (@torontoPolice). Long considered one of the most dehumanizing policing acts, strip search often requires 'suspects' to bend over to have their private parts examined. Surprisingly, while contended as an alarming issue, little has been done to contribute to the legal and political conversations around strip searches as a form of police power abuse in Toronto. This is especially relevant considering the city's racialized and gendered demographics, and how strip searches most likely affect these social groups (@stripSearchOpEd). It's evermore relevant looking back at strip searches under the context of the global pandemic COVID-19 during 2020 and 2021, where much of Toronto's diverse population is left vulnerable when interacting with police forces (@covidStripSearch).
 
@@ -30,30 +30,28 @@ This paper thus leverages gender and racial identities of 'suspects' arrested by
 
 analyze the distribution of gender and racial identities affected by strip searches [CONCLUSION!] To accordingly come to this conclusion, 
 
-Structurally, this paper is organized into the following sections: Data, Results, Discussion, and Conclusion. First, the Data section divulges the nature of the dataset obtained from Open Data Toronto and how data cleaning and analysis took place (@torontoPolice). Then, all the trends and findings I discovered are shown in the Results section, while the Discussion section further assesses these findings. Ultimately, the Conclusion section summarizes the paper's main insights. In additon, it's worth noting that the data was sourced from Open Data Toronto and Toronto Police Services themselves. Thus, this dataset may already contain much racial and gender bias from the very source that this paper is questioning: the Toronto Police Services and its enforcement of strip searching (@stripSearchOpEd). Then, the findings presented might not fully encapsulate the actual landscape of strip searching in Toronto from 2020 to 2021, yet it's still worth looking at due the alarming precedents of police power abuse.
+Howevever, it's worth noting that the data was sourced from Open Data Toronto and Toronto Police Services themselves. Thus, this dataset may already contain much racial and gender bias from the very source that this paper is questioning: the Toronto Police Services and its enforcement of strip searching (@stripSearchOpEd). Then, the findings presented might not fully encapsulate the actual landscape of strip searching in Toronto from 2020 to 2021, yet it's still worth looking at due the alarming precedents of police power abuse. Nonetheless, structurally, this paper is organized into the following sections: Data, Results, Discussion, and Conclusion. First, the Data section divulges the nature of the dataset obtained from Open Data Toronto and how data cleaning and analysis took place (@torontoPolice). Then, all the trends and findings I discovered are shown in the Results section, while the Discussion section further assesses these findings. Ultimately, the Conclusion section summarizes the paper's main insights.
 
 
-# Data {#sec-data}
+## Data 
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+The data package used for analysis was sourced from the Open Data Toronto Portal under the library `opendatatoronto` [@rOpenDataToronto]. Only one dataset was retrieved to examine the racial and gender identities of Toronto police arrests from 2020 to 2021: `Police Race and Identity Based Data - Arrests and Strip Searches` [@torontoPolice]. Data was generated, extracted and cleaned using the open-source statistical programming language R [@r], leveraging functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `dplyr` [@rDplyr], `readr` [@rReadr], `tibble` [@rTibble], `janitor` [@rJanitor], `kableExtra` [@rKableExtra], `naniar` [@rNaniar] and `knitr` [@rKnitr]. Additional details on data extraction and cleaning processes will be specified in subsequent sections below.
 
 ```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
 #| echo: false
+#| message: false
+#| label: tbl-cleaned_clinic_data
+#| tbl-cap: Sample of cleaned Covid-19 clinic data
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+#referenced kable stying from https://github.com/EthanSansom/torontocitytrees/blob/main/outputs/paper/paper.Rmd
+head(cleaned_clinic_data, 5) |>
+  kable(
+    col.names = c("ID", "Name", "Type", "Ward Name"),
+    booktabs = TRUE
+  )
 ```
 
-Talk more about it.
 
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
 
 ```{r}
 #| label: fig-planes
@@ -75,7 +73,7 @@ analysis_data |>
 Talk way more about it. 
 
 
-# Results
+## Results
 
 Our results are summarized in @tbl-modelresults.
 
@@ -109,85 +107,18 @@ modelsummary::modelsummary(
 
 
 
-
-# Discussion
-
-## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
-
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
-
-\newpage
-
-\appendix
-
-# Appendix {-}
+## Discussion
 
 
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
-
-```{r}
-#| eval: true
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
-```
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
-
-```{r}
-#| echo: false
-#| eval: true
-#| message: false
-#| warning: false
-#| label: fig-stanareyouokay
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
-
-plot(first_model, "trace")
-
-plot(first_model, "rhat")
-```
+## Conclusion
 
 
 
 \newpage
 
+## References
 
-# References
+
+
 
 

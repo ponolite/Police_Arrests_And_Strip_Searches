@@ -80,7 +80,7 @@ ggplot(race_per_event, aes(x=race, y=number_of_arrests)) +
 ggplot(gender_per_event, aes(x=sex, y=number_of_arrests)) + 
   geom_bar(stat = "identity") 
 
-# Barplot of strip search against racial identity
+# Barplot of strip search against racial identity, where each racial identity of each arrest is divided into including strip search or not
 # Code referenced from https://github.com/TDonofrio62/Shooting-Occurrences-in-Toronto/blob/main/Shooting_Occurrences/outputs/paper/Shooting_Occurrences.Rmd
 race_per_event |>
   ggplot(aes(x = race, y = number_of_arrests, fill = strip_search)) + 
@@ -93,7 +93,7 @@ race_per_event |>
   ) +
   scale_fill_viridis_d(option="turbo") 
 
-# Barplot of strip search against gender identity
+# Barplot of strip search against gender identity, where each gender identity of each arrest is divided into including strip search or not
 # Code referenced from https://github.com/TDonofrio62/Shooting-Occurrences-in-Toronto/blob/main/Shooting_Occurrences/outputs/paper/Shooting_Occurrences.Rmd
 gender_per_event |>
   ggplot(aes(x = sex, y = number_of_arrests, fill = strip_search)) + 

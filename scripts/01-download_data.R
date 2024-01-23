@@ -34,6 +34,6 @@ raw_police_arrests_strip_data
 
 write_csv (
          x = raw_police_arrests_strip_data, 
-         file - "inputs/data/raw_police_arrests_strip_data.csv"
+         file = "inputs/data/raw_police_arrests_strip_data.csv"
 )
          

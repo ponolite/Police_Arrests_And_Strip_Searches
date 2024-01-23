@@ -7,8 +7,12 @@
 # Pre-requisites: 
   # 01-download_data.R
 
-
 #### Workspace setup ####
+
+install.packages("tidyverse")
+install.packages("dplyr")
+install.packages("janitor")
+install.packages("naniar")
 
 library(tidyverse)
 library(dplyr)
@@ -22,20 +26,20 @@ raw_police_arrests_strip_data <- read_csv("inputs/data/raw_police_arrests_strip_
 cleaned_arrests_strip_data <-
   raw_police_arrests_strip_data |>
   janitor::clean_names() |>
-  select(-c(eventid, arrestid, personid, objectid, booked)) |>
-  rename(action_concealed = actions_at_arest_concealed_i,
+  select(-c(event_id, arrest_id, person_id, object_id, booked)) |>
+  rename(action_concealed = actions_at_arrest_concealed_i,
          action_combative = actions_at_arrest_combative,
          action_resisted = actions_at_arrest_resisted_d,
          action_mental_inst = actions_at_arrest_mental_inst,
          action_assaulted = actions_at_arrest_assaulted_o,
          action_cooperative = actions_at_arrest_cooperative,
-         reason_injury = searchreason_causeinjury,
-         reason_escape = searchreason_assistescape,
-         reason_weapons = searchreason_possessweapons,
-         reason_has_evidence = searchreason_possessevidence
-         items_found = itemsfound
+         reason_injury = search_reason_cause_injury,
+         reason_escape = search_reason_assist_escape,
+         reason_weapons = search_reason_possess_weapons,
+         reason_has_evidence = search_reason_possess_evidence,
+         items_found = items_found
          ) |> 
-  replace_with_na(replace = list(reason_injury = c("None"),
+  naniar::replace_with_na(replace = list(reason_injury = c("None"),
                                  reason_escape = c("None"),
                                  reason_weapons = c("None"),
                                  reason_has_evidence = c("None")))

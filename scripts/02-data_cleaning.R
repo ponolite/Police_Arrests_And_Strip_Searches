@@ -42,7 +42,7 @@ cleaned_arrests_strip_data <-
          race = perceived_race,
          age_group = age_group_at_arrest
          ) |> 
-  relocate(event_id) |>
+  relocate(event_id) |> # Put the event_id column to be the first one in the dataset
   naniar::replace_with_na(replace = list(reason_injury = c("None"), # Replace the string 'None' with NA to make it easier to manipulate data later on
                                  reason_escape = c("None"),
                                  reason_weapons = c("None"),

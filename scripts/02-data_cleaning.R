@@ -13,37 +13,39 @@
 library(tidyverse)
 library(dplyr)
 library(janitor)
+library(naniar)
 
 
 #### Clean data ####
 raw_police_arrests_strip_data <- read_csv("inputs/data/raw_police_arrests_strip_data.csv")
 
+
+shooting_occurences <- shooting_data %>% 
+  janitor::clean_names() %>% #clean names to make more simple and readable
+  select(-c(index,category)) %>% #get rid of unnecessary variables
+  rename(num_shootings=count) #change name to more informative name
+
+write_csv(shooting_occurences, "inputs/data/shooting_occurences.csv")
+
 cleaned_arrests_strip_data <-
   raw_police_arrests_strip_data |>
   janitor::clean_names() |>
-  select(wing_width_mm, wing_length_mm, flying_time_sec_first_timer) |>
-  filter(wing_width_mm != "caw") |>
-  mutate(
-    flying_time_sec_first_timer = if_else(flying_time_sec_first_timer == "1,35",
-                                   "1.35",
-                                   flying_time_sec_first_timer)
-  ) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "490",
-                                 "49",
-                                 wing_width_mm)) |>
-  mutate(wing_width_mm = if_else(wing_width_mm == "6",
-                                 "60",
-                                 wing_width_mm)) |>
-  mutate(
-    wing_width_mm = as.numeric(wing_width_mm),
-    wing_length_mm = as.numeric(wing_length_mm),
-    flying_time_sec_first_timer = as.numeric(flying_time_sec_first_timer)
-  ) |>
-  rename(flying_time = flying_time_sec_first_timer,
-         width = wing_width_mm,
-         length = wing_length_mm
+  select(-c(eventid, arrestid, personid, objectid, booked)) |>
+  rename(action_concealed = actions_at_arest_concealed_i,
+         action_combative = actions_at_arrest_combative,
+         action_resisted = actions_at_arrest_resisted_d,
+         action_mental_inst = actions_at_arrest_mental_inst,
+         action_assaulted = actions_at_arrest_assaulted_o,
+         action_cooperative = actions_at_arrest_cooperative,
+         reason_injury = searchreason_causeinjury,
+         reason_escape = searchreason_assistescape,
+         reason_weapons = searchreason_possessweapons,
+         reason_has_evidence = searchreason_possessevidence
+         items_found = itemsfound
          ) |> 
-  tidyr::drop_na()
-
+  replace_with_na(replace = list(reason_injury = c("None"),
+                                 reason_escape = c("None"),
+                                 reason_weapons = c("None"),
+                                 reason_has_evidence = c("None")))
 #### Save data ####
 write_csv(cleaned_arrests_strip_data,"inputs/data/cleaned_arrests_strip_data.csv")

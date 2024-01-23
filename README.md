@@ -1,4 +1,4 @@
-# An Intersectional Analysis of Police Arrests and Strip Searches in the Toronto Municipal, 2020-2021
+# An Alarming Rate of Gendered and Racialized Police Strip Searches in the Toronto Municipal, 2020-2021
 
 ## Overview of Repository
 

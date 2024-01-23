@@ -39,7 +39,8 @@ cleaned_arrests_strip_data <-
          reason_escape = search_reason_assist_escape,
          reason_weapons = search_reason_possess_weapons,
          reason_has_evidence = search_reason_possess_evidence,
-         race = perceived_race
+         race = perceived_race,
+         age_group = age_group_at_arrest
          ) |> 
   relocate(event_id) |>
   naniar::replace_with_na(replace = list(reason_injury = c("None"), # Replace the string 'None' with NA to make it easier to manipulate data later on

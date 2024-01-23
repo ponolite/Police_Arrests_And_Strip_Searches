@@ -1,8 +1,8 @@
 # An Intersectional Analysis of Police Arrests and Strip Searches in the Toronto Municipal, 2020-2021
 
-## Overview of Paper and Repository
+## Overview of Repository
 
-This repository and paper analyzes the gender and racial identity of 'suspects' who have undergone strip searches by the Toronto Police Service in the Toronto Municipal from 2020 to 2021. The dataset used for analysis was retrieved from Open Data Toronto, under the package 'Police Race and Identity Based Data - Arrests and Strip Searches.' 
+This repository contains data, code and a paper that analyze the gender and racial identity of 'suspects' who have undergone strip searches by the Toronto Police Service in the Toronto Municipal from 2020 to 2021. The dataset used for analysis was retrieved from Open Data Toronto, under the package 'Police Race and Identity Based Data - Arrests and Strip Searches.' 
 
 ## File Structure
 

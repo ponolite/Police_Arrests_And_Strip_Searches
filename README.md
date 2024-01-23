@@ -1,18 +1,18 @@
-# Analysis of COVID-19 Clinics Across Toronto
+# An Intersectional Analysis of Police Arrests and Strip Searches in the Toronto Municipal, 2020-2021
 
-## Overview of Paper
+## Overview of Paper and Repository
 
-This paper analyzes the distribution of COVID-19 immunization clinics across Toronto. Specifically, it is looking at the relationship between the number of clinics, population, and income level for each ward.
+This repository and paper analyzes the gender and racial identity of 'suspects' who have undergone strip searches by the Toronto Police Service in the Toronto Municipal from 2020 to 2021. The dataset used for analysis was retrieved from Open Data Toronot, under the package 'Police Race and Identity Based Data - Arrests and Strip Searches.' 
 
 ## File Structure
 
 The repo is structured as the following:
 
--   `input/data` contains the data sources used in analysis including raw and cleaned data.
+-   `input` contains the data sources used in analysis including raw and cleaned data and relevant literature.
 
 -   `outputs/paper` contains the files used to generate the paper, including the Quarto document and reference bibliography file, as well as the PDF of the paper.
 
--   `scripts` contains the R scripts used to simulate, download and clean data, as well as helper functions used in these routines.
+-   `scripts` contains the R scripts used to simulate, download and clean data.
 
 ## How to Run
 

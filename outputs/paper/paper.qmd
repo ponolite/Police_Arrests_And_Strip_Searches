@@ -21,37 +21,69 @@ library(knitr)
 library(opendatatoronto)
 ```
 
-
 ## Introduction
 
-In recent times, the Ford government has been at the forefront of public push-back, due to their revisions of strip search laws in Toronto under the Ministry of Correctional Services Act, R.S.O. 1990, c. M.22. Addressed by the Canadian Civil Liberties Association, the revisions "fall short of what is needed to ensure that prisoners are treated with basic respect" (@ontarioStripLaw). By definition, strip search is a police enforcement, which entails removing some or all articles of clothing to visually inspect a person's body and see if they harbor any items like weapons or drugs (@torontoPolice). Long considered one of the most dehumanizing policing acts, strip search often requires 'suspects' to bend over to have their private parts examined. Surprisingly, while contended as an alarming issue, little has been done to contribute to the legal and political conversations around strip searches as a form of police power abuse in Toronto. This is especially relevant considering the city's racialized and gendered demographics, and how strip searches most likely affect these social groups (@stripSearchOpEd). It's evermore relevant looking back at strip searches under the context of the global pandemic COVID-19 during 2020 and 2021, where much of Toronto's diverse population is left vulnerable when interacting with police forces (@covidStripSearch).
+In recent times, the Ford government has been at the forefront of public push-back in Toronto, due to their revisions of strip search laws under the Ministry of Correctional Services Act, R.S.O. 1990, c. M.22. Addressed by the Canadian Civil Liberties Association, the revisions "fall short of what is needed to ensure that prisoners are treated with basic respect" (@ontarioStripLaw). By definition, strip search is a police enforcement, which entails removing some or all articles of clothing to visually inspect a person's body and see if they harbor any items like weapons or drugs (@torontoPolice). Long considered one of the most dehumanizing policing acts, strip search often requires 'suspects' to bend over to have their private parts examined. Surprisingly, while contended as an alarming issue, little has been done to contribute to the legal and political conversations around strip searches as a form of police power abuse in Toronto. This is especially relevant considering the city's racialized and gendered demographics, and how strip searches most likely affect these social groups (@stripSearchOpEd). It's evermore relevant looking back at strip searches under the context of the global pandemic COVID-19 during 2020 and 2021, where much of Toronto's diverse, racialized population is left vulnerable when interacting with police forces (@covidStripSearch).
 
-This paper thus leverages gender and racial identities of 'suspects' arrested by Toronto police from 2020 to 2021, and assesses if there is a correlation between racialized and gendered Toronto residents and strip searching. The converging social identities of gender and race may prove to be a empowering source to the 'suspects', but a factor of oppression to the police forces. Therefore, this paper aims to contribute to the conversation around strip searching of the vulnerable population, and aims to be a form of data activism to counter to injustices related to police power abuse under the subtext of COVID-19. To accordingly analyze, I first map out the distribution of Toronto police arrests by race and gender from 2020 to 2021 using bar graphs and time plots. Then with each graph, and for each variable of race and gender, the distribution bars would be sectioned into including strip searches or not to visualize the statistics for each racial and gender identities identified. With that,
+This paper thus leverages gender and racial identities of 'suspects' arrested by Toronto police from 2020 to 2021, and assesses if there is a correlation between racialized and gendered Toronto residents and strip searching. The converging social identities of gender and race may prove to be a empowering source to the 'suspects', but a factor of oppression to the police forces. Therefore, this paper aims to contribute to the conversation around strip searching of the vulnerable population, and aims to be a form of data activism to counter to injustices related to police power abuse under the subtext of COVID-19. To accordingly analyze, I first map out the distribution of Toronto police arrests by race and gender from 2020 to 2021 using bar graphs and various other graphs Then with each graph, and for each variable of race and gender, the distribution bars would be sectioned into 'including strip searches' or 'not including' to visualize the statistics of strip searching for each racial and gender identity identified. With that,
 
 analyze the distribution of gender and racial identities affected by strip searches [CONCLUSION!] To accordingly come to this conclusion, 
 
 Howevever, it's worth noting that the data was sourced from Open Data Toronto and Toronto Police Services themselves. Thus, this dataset may already contain much racial and gender bias from the very source that this paper is questioning: the Toronto Police Services and its enforcement of strip searching (@stripSearchOpEd). Then, the findings presented might not fully encapsulate the actual landscape of strip searching in Toronto from 2020 to 2021, yet it's still worth looking at due the alarming precedents of police power abuse. Nonetheless, structurally, this paper is organized into the following sections: Data, Results, Discussion, and Conclusion. First, the Data section divulges the nature of the dataset obtained from Open Data Toronto and how data cleaning and analysis took place (@torontoPolice). Then, all the trends and findings I discovered are shown in the Results section, while the Discussion section further assesses these findings. Ultimately, the Conclusion section summarizes the paper's main insights.
 
-
 ## Data 
 
-The data package used for analysis was sourced from the Open Data Toronto Portal under the library `opendatatoronto` [@rOpenDataToronto]. Only one dataset was retrieved to examine the racial and gender identities of Toronto police arrests from 2020 to 2021: `Police Race and Identity Based Data - Arrests and Strip Searches` [@torontoPolice]. Data was generated, extracted and cleaned using the open-source statistical programming language R [@r], leveraging functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `dplyr` [@rDplyr], `readr` [@rReadr], `tibble` [@rTibble], `janitor` [@rJanitor], `kableExtra` [@rKableExtra], `naniar` [@rNaniar] and `knitr` [@rKnitr]. Additional details on data extraction and cleaning processes will be specified in subsequent sections below.
+The data package used for analysis was sourced from the Open Data Toronto Portal under the library `opendatatoronto` [@rOpenDataToronto]. Only one dataset was retrieved from the data package to examine the racial and gender identities of Toronto police arrests from 2020 to 2021, which is the package `Police Race and Identity Based Data - Arrests and Strip Searches` [@torontoPolice]. Data was generated, extracted and cleaned using the open-source statistical programming language R [@r], leveraging functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `dplyr` [@rDplyr], `readr` [@rReadr], `tibble` [@rTibble], `janitor` [@rJanitor], `kableExtra` [@rKableExtra], `naniar` [@rNaniar] and `knitr` [@rKnitr]. 
+
+Last updated as of December 2, 2022, this chosen dataset was published by Toronto Police Services to convey information related to all arrests and strip searches by their police force from 2020 to 2021. Originally, the dataset features information on date of arrest, incident id, arrest id, person id, the arrested person's race, sex, and age group, arrest location, whether the arrest includes strip searching, whether the person was booked at the police station, the person's action at the time of arrest, and the police's reason for strip searching along with details on any items found. While the dataset contains a wide range of information, there was much naming inconsistency and many variables outside the scope of this paper. Thus, in order to conduct an intersectional—or gender and race—analysis of police strip searches, I have to further clean this dataset and split it into two smaller datasets. Additional details on data extraction and cleaning will be specified in subsequent sections below.
+
+### Racial and Gender Identities of Police Strip Search 
+
+To streamline the data regarding racial and gender identities of the people involved in police strip searches, the names within the original dataset are simplified and then the dataset is split into a smaller one containing relevant columns (see @tbl-cleaned_race_gender_data). This dataset contains demographic and strip search-relevant information for each police arrest event, such as race, gender, whether the event involves a strip search, and if it is a strip search, are there any items found. 
+
+Particularly, the column 'Strip Search' signifies whether an arrest involves strip search. If the data cell contains 'NA', this means that the event in particular doesn't have a strip search. But if it is a '1' in that particular data cell, this means that the event does involve involve a strip search. This goes the same  for the 'Items Found' column, where '1s' and '0s' will only appear if the 'Strip Search' value of an event is a '1'. This is because the items found within a strip search is only available when a police arrest does involve strip searching. Moreover, retainment of the numeric '1' and '0' instead of 'Yes' or 'No' ensures that the data can be quantified later one.
+
+Furthermore, the reason for keeping rows of events that don't include strip search is to later produce summary statistics of events with and without strip searches. This further aligns with the task of the paper at hand, which is to critically reflect on the rate of strip searching on people with racialized and gendered identities.
+
 
 ```{r}
 #| echo: false
 #| message: false
-#| label: tbl-cleaned_clinic_data
-#| tbl-cap: Sample of cleaned Covid-19 clinic data
+#| label: tbl-cleaned_race_gender_data
+#| tbl-cap: Sample of Cleaned Race and Gender Data against Police Arrests with Strip Searches
 
 #referenced kable stying from https://github.com/EthanSansom/torontocitytrees/blob/main/outputs/paper/paper.Rmd
-head(cleaned_clinic_data, 5) |>
+head(cleaned_race_gender_data, 5) |>
   kable(
-    col.names = c("ID", "Name", "Type", "Ward Name"),
+    col.names = c("ID", "Race", "Gender", "Strip Search", "Items Found"),
     booktabs = TRUE
   )
 ```
 
+### Reasons for Police Strip Search
 
+The other dataset that the original dataset is split into conveys all police arrests that involve strip searching and the reasons behind strip searching. Under close examination, the naming of individual data cells in different columns from the original, raw dataset is quite disordered, for instance, using 'None' and 'XX' in place of the usual 'NA'. Thus the all inconsistent data cells were renamed to streamline the naming conventions and data processing later on. After renaming, the big dataset was split into containing relevant columns (see @tbl-cleaned_search_reasons_data). 
+
+Except for "ID" column, all other columns in this new dataset are all reasons which substantiate why the Toronto police force conducts  strip search under certain arrests. "Reason: Injury" is for people who have caused injuries, "Reason: Assist Escape" is for people who may have helped other suspects escape, "Reason: Weapons" is for people who possess weapons, and "Reason: Possess Evidence" is for people who are suspected of harboring items like drugs or an alibi. For each "Reason" colum, if the data cell contains '0', this means that strip search doens't happen because of that particular reason. Vice versa, if it contains a '1', this means strip search does happen because of that reason. For each police arrest event in this dataset, there can be none to multiple reasons combined which lead to strip searching. 
+
+Then, for this particular dataset that only retains reasons for strip searching, all instances of police arrests without strip searching are dropped using the 'filter()' function, along an '!is.na()' function of any "reason" column nested within. 
+
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-cleaned_search_reasons_data
+#| tbl-cap: Sample of Cleaned Reasons for Police Strip Searches Data
+
+#referenced kable stying from https://github.com/EthanSansom/torontocitytrees/blob/main/outputs/paper/paper.Rmd
+head(cleaned_search_reasons_data, 5) |>
+  kable(
+    col.names = c("ID", "Reason - Injury", "Reason - Escape", "Reason - Weapons", "Reason - Has Evidence"),
+    booktabs = TRUE
+  )
+```
+
+## Results
 
 ```{r}
 #| label: fig-planes
@@ -71,9 +103,6 @@ analysis_data |>
 ```
 
 Talk way more about it. 
-
-
-## Results
 
 Our results are summarized in @tbl-modelresults.
 

@@ -39,7 +39,7 @@ cleaned_arrests_strip_data <-
          reason_injury = search_reason_cause_injury,
          reason_escape = search_reason_assist_escape,
          reason_weapons = search_reason_possess_weapons,
-         reason_has_evidence = search_reason_possess_evidence,
+         reason_possess_evidence = search_reason_possess_evidence,
          race = perceived_race,
          age_group = age_group_at_arrest,
          gender = sex
@@ -65,8 +65,13 @@ cleaned_race_gender_data =
 
 cleaned_search_reasons_data = 
   cleaned_arrests_strip_data |>
-  select(event_id, reason_injury,	reason_escape, reason_weapons, reason_has_evidence, strip_search, items_found) |>
-  filter(!is.na(reason_injury) | !is.na(reason_escape) | !is.na(reason_weapons) | !is.na(reason_has_evidence))
+  select(event_id, reason_injury,	reason_escape, reason_weapons, reason_possess_evidence) |>
+  filter(!is.na(reason_injury))
+
+
+  cleaned_arrests_strip_data |>
+  select(event_id, reason_injury,	reason_escape, reason_weapons, reason_possess_evidence, items_found) |>
+  filter(reason_injury == 0 & reason_escape == 0 & reason_weapons == 0 & reason_possess_evidence == 0)
 
 #### Save data ####
 write_csv(cleaned_arrests_strip_data,"inputs/data/cleaned_arrests_strip_data.csv")

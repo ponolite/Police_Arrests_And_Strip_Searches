@@ -245,7 +245,7 @@ cleaned_search_reasons_data |>
   count() |>
   rename(count = n) |>
   kable(
-    col.names = c("Number of Reasons", "Items_Found", "Count"),
+    col.names = c("Number of Reasons", "Items Found", "Count"),
     booktabs = TRUE
   )
 ```
@@ -263,8 +263,8 @@ cleaned_search_reasons_data |>
   group_by(total_reasons, items_found, race) |>
   count() |>
   rename(count = n) |>
-  ggplot(aes(x = total_reasons, y = count, colour = race)) +
-  geom_point() +
+  ggplot(aes(x = total_reasons, y = count, colour = race, size = count)) +
+  geom_point(alpha = 0.5) +
   theme_bw() +
   theme(legend.key.size = unit(0.5, 'cm'))+
   labs(x = "Total Reasons for Strip Searching",
@@ -274,18 +274,50 @@ cleaned_search_reasons_data |>
   scale_fill_viridis_d(option="cividis") 
 
 cleaned_search_reasons_data |>
-  group_by(total_reasons, items_found, race) |>
+  group_by(total_reasons, items_found, gender) |>
   count() |>
   rename(count = n) |>
-  ggplot(aes(x = total_reasons, y = count, colour = race)) +
-  geom_point() +
+  ggplot(aes(x = total_reasons, y = count, colour = gender, size = count)) +
+  geom_point(alpha = 0.5) +
   theme_bw() +
   theme(legend.key.size = unit(0.5, 'cm'))+
   labs(x = "Total Reasons for Strip Searching",
        y = "Count",
-       color = "Race"
+       color = "Gender"
        ) +
   scale_fill_viridis_d(option="cividis") 
+
+cleaned_search_reasons_data |>
+  group_by(total_reasons, items_found, gender) |>
+  count() |>
+  rename(count = n) |>
+  ggplot(aes(x = total_reasons, y = count, colour = items_found)) +
+  geom_bar() +
+  theme_bw() +
+  theme(legend.key.size = unit(0.5, 'cm'))+
+  labs(x = "Total Reasons for Strip Searching",
+       y = "Items Found",
+       color = "Gender"
+       ) +
+  scale_fill_viridis_d(option="cividis") 
+
+cleaned_race_gender_data |>
+  ggplot(aes(x = income, y = count, label = ward_code)) + 
+  geom_point() + 
+  geom_beeswarm() +
+  geom_smooth(method=lm, se=FALSE) + 
+  geom_text(hjust=-0.5, vjust=0.5) + 
+  labs(
+    title = "Number of clinics vs. average household income for each ward",
+    x = "Average household income",
+    y = "Number of clinics",
+    label = "Ward Code"
+  ) +
+  theme_minimal()
+
+
+
+
 ```
 
 ## Discussion

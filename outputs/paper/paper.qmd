@@ -11,6 +11,14 @@ editor: visual
 toc: true
 number-sections: true
 bibliography: references.bib
+output: 
+  pdf_document :
+    keep_tex: true
+    number_sections: true
+header-includes:
+ \usepackage{wrapfig}
+ \usepackage{float}
+ \floatplacement{figure}{H}
 ---
 
 ```{r}
@@ -25,9 +33,11 @@ library(dplyr)
 library(readr)
 library(kableExtra)
 library(here)
-library(ggbeeswarm)
 library(ggrepel)
 library(ggplot2)
+library(float)
+
+citation("float")
 
 
 #### Read in cleaned data ####
@@ -52,7 +62,7 @@ cleaned_search_reasons_data = read_csv(
 
 Recently, the Ford government has been at the forefront of public push-back in Toronto, due to their revisions of strip search laws under the Ministry of Correctional Services Act, R.S.O. 1990, c. M.22. Addressed by the Canadian Civil Liberties Association, the revisions "fall short...to ensure that prisoners are treated with basic respect" [@ontarioStripLaw]. By definition, strip search is a police enforcement, which entails removing some or all articles of clothing to visually inspect a person's private body parts and see if they harbor any items like weapons or drugs [@torontoPolice]. Surprisingly, while contended as a dehumanizing policing act, little has been done to assess strip search as a form of police power abuse in Toronto. This is especially relevant considering the city's racialized and gendered demographics, how strip searches most likely affect these social groups under the subtext of COVID-19 from 2020 to 2021 [@stripSearchOpEd]. 
 
-This paper thus inspects gender and racial identities of all Toronto police arrests from 2020 to 2021, and assesses if there is a correlation between marginalized identities and police strip searching. Foremost, this paper aims to be a form of data activism, contributing to the dialogue around police power abuse, using strip-search to undermine the the vulnerable populations in Toronto. To analyze, I first map out the distribution of Toronto police arrests by race and gender and reasons for strip searching from 2020 to 2021 using stacked summary tables, stacked bar charts and bubble charts. Particularly, for each category of race and gender, the distribution bars or points would be sectioned into various categories like 'including strip searches' or 'not including' to visualize the statistics of strip searching for intersecting social identities With that, It's worth noting that this dataset may already contain much racial and gender bias, because it was retrieved from the very source that this paper is questioning: the Toronto Police Services [@stripSearchOpEd]. Then, the findings presented might not fully encapsulate the actual landscape of strip searching in Toronto from 2020 to 2021. Yet, it's still worth looking at due the precedents of police power abuse [@covidStripSearch]. 
+This paper thus inspects gender and racial identities of all Toronto police arrests from 2020 to 2021, and assesses if there is a correlation between marginalized identities and police strip searching. Foremost, this paper aims to be a form of data activism, contributing to the dialogue around police power abuse, using strip-search to undermine the the vulnerable populations in Toronto. To analyze, I first map out the distribution of Toronto police arrests by race and gender and reasons for strip searching from 2020 to 2021 using stacked summary tables, stacked histograms and bubble charts. Particularly, for each category of race and gender, the distribution bars or points would be sectioned into various categories like 'including strip searches' or 'not including' to visualize the statistics of strip searching for intersecting social identities With that, It's worth noting that this dataset may already contain much racial and gender bias, because it was retrieved from the very source that this paper is questioning: the Toronto Police Services [@stripSearchOpEd]. Then, the findings presented might not fully encapsulate the actual landscape of strip searching in Toronto from 2020 to 2021. Yet, it's still worth looking at due the precedents of police power abuse [@covidStripSearch]. 
 
 Structurally then, this paper is organized into the following sections: Data, Results, Discussion, and Conclusion. First, the Data section divulges the nature of the dataset obtained from Open Data Toronto and how data cleaning and extraction took place [@torontoPolice]. Then, all the trends and findings discovered are shown in the Results section, while the Discussion section further assesses these findings. Ultimately, the Conclusion section summarizes the paper's main insights.
 
@@ -62,9 +72,9 @@ The data package used for analysis was sourced from the Open Data Toronto Portal
 
 ### Overview of Data Extraction and Cleaning
 
-This chosen dataset was published by Toronto Police Services to convey information related to all police arrests and strip searches from 2020 to 2021 (last updated on December 2, 2022). Originally, the dataset features information on date of arrest, event id, the arrested person's race, sex, and age group, arrest location, whether the arrest includes strip searching, the person's action at the time of arrest, and the police's reason for strip searching along with any items found. Data of strip searches are lodged based on each police arrest throughout 2020 and 2021, using a unique identifier called `event_id` which identifies the nature of the strip search and the social identities of the people involved.  
+Published by Toronto Police Services, this dataset conveys information related to all police arrests and strip searches from 2020 to 2021 (last updated on December 2, 2022). Originally, the dataset features 26 varibles, including date of arrest, event id, the arrested person's race, sex, and age group, arrest location, whether the arrest includes strip searching, the person's action at the time of arrest, and the police's reason for strip searching along with any items found. Data of strip searches are lodged based on each police arrest throughout 2020 and 2021, using a unique identifier called `event_id` which identifies the nature of the strip search and the social identities of the people involved.  
 
-Informative as it is, the dataset contains much naming inconsistency and many columns outside the scope of this paper. Thus, in order to conduct an intersectional---or gender and race---analysis of police strip searches, I have to further clean this dataset and split it into two smaller datasets. Additional details on data extraction and cleaning will be specified in subsequent sections.
+Informative as it is, the dataset contains much naming inconsistency and many variables outside the scope of this paper. Thus, in order to conduct an intersectional---or gender and race---analysis of police strip searches, I have to further clean this dataset and split it into two smaller datasets. Additional details on data extraction and cleaning will be specified in subsequent sections.
 
 ### Racial and Gender Identities of Police Strip Search
 
@@ -88,9 +98,9 @@ head(cleaned_race_gender_data, 6) |>
 
 ### Reasons for Police Strip Search
 
-To further inspect the nature of each strip search, reasons for strip searching prove a necessary data source. Thus, this other dataset conveys all police arrests that involve strip searching and the reasons behind strip searching. Under close examination, the naming of individual data cells in different columns from the original, raw dataset is quite disordered, for instance, using `None` and `XX` in place of the usual `NA`. Thus, all inconsistent data cells were renamed to streamline the naming conventions and data processing later on. After renaming, the big dataset was split into containing relevant columns ([see @tbl-cleaned_search_reasons_data]). Then, for this particular dataset, all instances of police arrests without strip searching are dropped using the `filter()` function, along with a `!is.na()` function for rows with `NA` as values for all the `reason` column. 
+To further inspect the nature of each strip search, reasons for strip searching prove a vital data source. Thus, this dataset--another sub-dataset split from the orginal raw data--conveys all police arrests that involve strip searching and the reasons behind strip searching. Under close examination, the naming of individual data cells from the original, raw dataset is quite disordered, for instance, using `None` and `XX` in place of the usual `NA`. Thus, all inconsistent data cells were renamed to streamline the naming conventions and data processing later on. After renaming, the big dataset was refined into containing relevant columns ([see @tbl-cleaned_search_reasons_data]). Then, for this particular dataset, all instances of police arrests without strip searching are dropped using the `filter()` function, along with a `!is.na()` function for rows with `NA` as values for all of the `reason` variables 
 
-Except for "ID" column, all other columns in this new dataset are reasons which account for why the Toronto police force conducts strip search under certain arrests. For instance, "Reason - Assist Escape" is for people who may have helped other suspects escape and "Reason - Possess Evidence" is for people who are suspected of harboring items like drugs or an alibi. For each "Reason" column, if the data cell contains `0`, this means that strip search doesn't happen because of that particular reason. Vice versa, if it contains `1`, this means strip search happens because of that reason. In addition, a new column called "Total Reasons" totals all reasons used to account for each police strip search is added with `mutate()`, where all instances of `1` and `0` are changed into numeric with `as.numeric()` and then summed together.
+Except for "ID" variable, all other variables in this new dataset are reasons to account for why the Toronto police force conducts strip search under certain arrests. For instance, "Reason - Assist Escape" is for people who may have helped other suspects escape and "Reason - Possess Evidence" is for people who are suspected of harboring items like drugs or an alibi. For each "Reason" variable, if the data cell contains `0`, this means that strip search doesn't happen. Vice versa, if it contains `1`, this means strip search happens. In addition, a new column called "Total Reasons" is added to sum  all reasons used to account for each strip search. To do this, `mutate()` is utilized, where all instances of `1` and `0` are changed into numeric with `as.numeric()` and then summed together.
 
 ```{r}
 #| echo: false
@@ -110,19 +120,13 @@ Except for "ID" column, all other columns in this new dataset are reasons which 
 
 ## Results
 
-Throughout 2020 and 2021, there are a total of 7801 recorded strip searches out of 65276 incidents of police arrests, which accounts for 12% of all arrests [see @tbl-reasons-strip-search]. Excluding those whose racial identities are unknown and non-existent, by percentage, the three most affected racial groups are, in descending order, of Indigenous, African and Caucasian descent, standing at 16%, 14% and 13% each [see @tbl-race-strip-search]. Gender-wise, men are more likely to be strip searched compared to women, at 12% and 10% respectively (@tbl-gender-strip-search). Though, observably, the difference between the two sexes quite marginal. People of unidentified gender identity aren't strip searched at all according to the dataset (denoted as `U` in the tables and graphs).
-
-
-As of January 22, 2023, there are 434 COVID-19 immunization clinics across the City of Toronto. Further breakdown shows that there are 5 clinics that are city operated, 16 clinics that are run by hospitals, and 415 are offered in local pharmacies. On average, there are 17 clinics per ward in Toronto, with standard deviation of 6. The wards with the highest number of clinics are: Toronto Center (Ward 13) with 29 clinics, Etobicoke-Lakeshore (Ward 3) with 28 clinics, and University-Rosedale (Ward 11) with 28 clinics. The wards with the lowest number of clinics are: Humber River-Black Creek (Ward 7) with 9 clinics, Davenport (Ward 9) with 12 clinics, Scarborough Southwest (Ward 20) with 12 clinics, Scarborough-Agincourt (Ward 22) with 12 clinics, and Scarborough-Rouge Park (Ward 25) with 12 clinics.
-
-In add
-
-cite toronto population to say that while the number of white poeple seem large, it's not really
-
 ### Racialized and Gendered Police Strip Searches Statistics 
 
-In addition, a new column called "Total Reasons" totals all reasons used to account for each police strip search is added with `mutate()`, where all instances of `1` and `0` are changed into numeric with `as.numeric()` and then summed together.
-to ensure that all data are comparative to one another
+To encapsulate, throughout 2020 and 2021, there are a total of 7801 recorded strip searches out of 65276 incidents of police arrests, which accounts for a whooping 12% of all arrests (see [@tbl-items-strip-search]). Excluding those whose racial identities are unknown and non-existent, by percentage, the three most affected racial groups are, in descending order, of Indigenous, Black and White ethnic roots, standing at 16%, 14% and 13% each (see [@tbl-race-strip-search]). Gender-wise, men are more likely to be strip searched compared to women, at 12% and 10% respectively (see [@tbl-gender-strip-search]). Though, observably, the difference is quite marginal. To note, people of unidentified gender identity aren't strip searched at all according to the dataset (denoted as `U` in the tables and graphs).
+
+It's worth noting that to account for the discrepancies between counts of strip search grouped by different racial identities are challenging. This is due to the incongruous population spread of each racial group within Toronto. For instance, Toronto is largely made up of people from Caucasian descent, thus it's more probable that the people arrested and strip searched by the police force are largely white in the dataset (see [@@tbl-race-strip-search]) Therefore, to render the data statistically proportionate to one another, 
+
+cite toronto population to say that while the number of white poeple seem large, it's not really
 
 ```{r}
 #| echo: false
@@ -133,16 +137,21 @@ to ensure that all data are comparative to one another
 cleaned_race_gender_data |>
   group_by(race, strip_search) |>
   count() |>
-  rename(number_of_arrests = n) |>
+  rename(count = n) |>
   group_by(race) |>
-  mutate(percentage = round(number_of_arrests/sum(number_of_arrests)*100)) |>
+  mutate(percentage = round(count/sum(count)*100),
+         total_arrests = sum(count)) |>
   kable(
-    col.names = c("Race", "Strip Search", "Number of Arrests", "Percentage"),
+    col.names = c("Race", "Strip Search", "Count", "Percentage", "Total Arrests"),
     booktabs = TRUE)
 
 ```
 
-```{r fig.width=8, fig.height=5}
+
+In addition, a new column called "Total Reasons" totals all reasons used to account for each police strip search is added with `mutate()`, where all instances of `1` and `0` are changed into numeric with `as.numeric()` and then summed together.
+to ensure that all data are comparative to one another
+
+```{r}
 #| echo: false
 #| message: false
 #| label: fig-race_strip_search
@@ -151,9 +160,9 @@ cleaned_race_gender_data |>
 cleaned_race_gender_data |>
   group_by(race, strip_search) |>
   count() |>
-  rename(number_of_arrests = n) |>
+  rename(count = n) |>
   group_by(race) |>
-  mutate(percentage = round(number_of_arrests/sum(number_of_arrests)*100)) |>
+  mutate(percentage = round(count/sum(count)*100)) |>
   ggplot(aes(x = race, y = percentage, fill = strip_search)) + 
   geom_bar(stat="identity") +
   coord_flip() +
@@ -176,13 +185,13 @@ cleaned_race_gender_data |>
 cleaned_race_gender_data |>
   group_by(race, strip_search) |>
   count() |>
-  rename(number_of_arrests = n) |>
+  rename(count= n) |>
   group_by(race) |>
-  mutate(percentage = round(number_of_arrests/sum(number_of_arrests)*100)) |>
+  mutate(percentage = round(count/sum(count)*100)) |>
   ggplot(mapping = aes(x = gender, fill = strip_search), data=cleaned_race_gender_data) +
   geom_bar() + 
   labs(y = "Percentage", x = "Strip Search", fill = "Strip Search") +
-  facet_wrap(~race) + scale_fill_viridis_d(option="cividis") +
+  facet_wrap(~race) + scale_fill_viridis_d(option="cividis") 
 
 ```
 
@@ -196,11 +205,12 @@ cleaned_race_gender_data |>
 cleaned_race_gender_data |>
   group_by(gender, strip_search) |>
   count() |>
-  rename(number_of_arrests = n) |>
+  rename(count = n) |>
   group_by(gender) |>
-  mutate(percentage = round(number_of_arrests/sum(number_of_arrests)*100)) |>
+  mutate(percentage = round(count/sum(count)*100),
+         total_arrests = sum(count)) |>
   kable(
-    col.names = c("Gender", "Strip Search", "Number of Arrests", "Percentage"),
+    col.names = c("Gender", "Strip Search", "Count", "Percentage", "Total Arrests"),
     booktabs = TRUE)
 
 ```
@@ -214,23 +224,23 @@ cleaned_race_gender_data |>
   cleaned_race_gender_data |>
   group_by(gender, strip_search) |>
   count() |>
-  rename(number_of_arrests = n) |>
-  ggplot(aes(x = gender, y = number_of_arrests, fill = strip_search)) + 
+  rename(count = n) |>
+  ggplot(aes(x = gender, y = count, fill = strip_search)) + 
   geom_bar(stat="identity") + 
   coord_flip() +
   theme_minimal() +
   theme(legend.key.size = unit(0.5, 'cm')) +
   labs(x = "Gender",
-       y = "Number of Arrests",
+       y = "Count",
        fill = "Strip Search"
   ) + scale_fill_viridis_d(option="cividis")
 
 cleaned_race_gender_data |>
   group_by(gender, strip_search) |>
   count() |>
-  rename(number_of_arrests = n) |>
+  rename(count = n) |>
   group_by(gender) |>
-  mutate(percentage = round(number_of_arrests/sum(number_of_arrests)*100)) |>
+  mutate(percentage = round(count/sum(count)*100)) |>
   ggplot(aes(x = gender, y = percentage, fill = strip_search)) + 
   geom_bar(stat="identity") + 
   coord_flip() +
@@ -244,12 +254,12 @@ cleaned_race_gender_data |>
 cleaned_race_gender_data |>
   group_by(gender, strip_search) |>
   count() |>
-  rename(number_of_arrests = n) |>
+  rename(count = n) |>
   group_by(gender) |>
-  mutate(percentage = round(number_of_arrests/sum(number_of_arrests)*100)) |>
+  mutate(percentage = round(count/sum(count)*100)) |>
   ggplot(mapping = aes(x = strip_search, fill = strip_search), data=cleaned_race_gender_data) +
   geom_bar() + 
-  labs(y = "Number of Arressts", x = "Strip Search", fill = "Strip Search") +
+  labs(y = "Count", x = "Strip Search", fill = "Strip Search") +
   facet_wrap(~gender) + scale_fill_viridis_d(option="cividis") 
 
 
@@ -257,39 +267,47 @@ cleaned_race_gender_data |>
 
 ### Police Strip Searches and Items Found Statistics 
 
-```{r}
-#| echo: false
-#| message: false
-#| results: hide
-#| label: tbl-reasons-strip-search
-#| tbl-cap: Summary Statistics of Items Found During Police Strip Searches
+As for reasons of strip searching provided by the Toronto Police Services and items found along these strip searches, there is a substantial 10% of strip searches being conducted without any reason (see [@tbl-reasons-strip-search]). Most commonly, strip searches are carried out under at least 1 or 2 reasons, both at 29% (see [@tbl-reasons-strip-search]). Overall, most of strip search enforcement doesn't garner any items in question from the people who were suspected by the police. Specifically, a whooping 63% of strip searches don't have any items found (see [@tbl-items-strip-search]).
 
-cleaned_race_gender_data |>
-  group_by(strip_search, items_found) |>
-  count() |>
-  rename(number_of_arrests = n) |>
-  filter(strip_search == "Yes") |>
-  select(items_found, number_of_arrests) |>
-  kable(
-    col.names = c("Strip Search", "Items Found", "Number of Arrests"),
-    booktabs = TRUE
-  )
-```
 
 ```{r}
 #| echo: false
 #| message: false
 #| label: tbl-items-strip-search
+#| tbl-cap: Summary Statistics of Items Found During Police Strip Searches
+
+cleaned_race_gender_data |>
+  group_by(strip_search, items_found) |>
+  count() |>
+  rename(count = n) |>
+  filter(strip_search == "Yes") |>
+  select(items_found, count) |>
+  group_by(strip_search) |>
+  mutate(total_searches = sum(count),
+         percentage_of_items_found = round(count/total_searches*100)) |>
+  kable(col.names = c("Strip Search", "Items Found", "Count", "Total Searches", "Percentage of Items Found"), booktabs = TRUE
+        )
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-reasons-strip-search
 #| tbl-cap: Summary Statistics of Reasons for Police Strip Searches
 
 cleaned_search_reasons_data |>
   group_by(total_reasons, items_found) |>
   count() |>
   rename(count = n) |>
+  group_by(total_reasons) |>
+  mutate(percentage = round(count/sum(count)*100),
+         total_searches = sum(count),
+         percentage_total = round(total_searches/7801*100)) |>
   kable(
-    col.names = c("Number of Reasons", "Items Found", "Count"),
+    col.names = c("Total Reasons", "Items Found", "Count", "Percentage by Reasons", "Total Searches", "Percentage by Searches"),
     booktabs = TRUE
-  )
+  ) |> 
+  kable_styling(latex_options="scale_down")
 ```
    
 
@@ -344,6 +362,10 @@ cleaned_search_reasons_data |>
 ## Discussion
 
 binaristic view of gender
+
+mystified, how is race sectioned and divided
+
+biased source, observation
 
 ## Conclusion
 

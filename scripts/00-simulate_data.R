@@ -23,7 +23,7 @@ set.seed(56) #ensure simulated data's reproducibility
 
 simulated_data <-
   tibble(
-    #use 1 through 65276 to represent each event
+    #use 1 through 65276 to represent each arrest event
     "event" = 1:65276,
     #randomly pick a race identified from the dataset, with replacement, 65276 times
     "race" = sample(
@@ -32,7 +32,7 @@ simulated_data <-
       replace = TRUE
     ),
     #randomly pick one gender identity identified from the dataset, with replacement, 65276 times
-    "sex" = sample(
+    "gender" = sample(
       x = c("Male", "Female", "Unidentified"),
       size = 65276,
       replace = TRUE
@@ -43,23 +43,40 @@ simulated_data <-
       size = 65276,
       replace = TRUE
     )
-)
+  )
 
-simulated_data
-
-#add a new items_found column to those events with strip search, with replacement, 32717 times (32717 is based on the set.seed() number)
+#add four new columns items_found, reason_injury, reason_escape, reason_weapons and reason_possess_evidence to those events with strip search, with replacement, 32717 times (32717 is based on the set.seed() number)
 
 set.seed(56)
 
-simulated_data_items <-
+simulated_data_items_reason <-
   simulated_data |>
   filter(strip_search == "Yes") |>
   mutate(
     "items_found" = sample(
       x = c("Yes", "No"),
       size = 32717,
-      replace = TRUE
-    )
+      replace = TRUE),
+      #randomly pick if the event includes strip search the reason is due to the person causing injury, with replacement, 32717 times
+      "reason_injury" = sample(
+        x = c(1, 0),
+        size = 32717,
+        replace = TRUE),
+      #randomly pick if the event includes strip search the reason is due to the person assisting escape, with replacement, 32717 times
+      "reason_escape" = sample(
+        x = c(1, 0),
+        size = 32717,
+        replace = TRUE),
+      #randomly pick if the event includes strip search the reason is due to the person having weapons, with replacement, 32717 times
+      "reason_weapons" = sample(
+        x = c(1, 0),
+        size = 32717,
+        replace = TRUE),
+      #randomly pick if the event includes strip search the reason is due to the person possessing evidence, with replacement, 32717 times
+      "reason_possess_evidence" = sample(
+        x = c(1, 0),
+        size = 32717,
+        replace = TRUE)
   )
 
 #### Summarize the victim's gender identity of each police arrest event ####
@@ -68,7 +85,7 @@ set.seed(56)
 
 gender_per_event = 
   simulated_data |>
-  group_by(sex, strip_search) |>
+  group_by(gender, strip_search) |>
   count() |>
   rename(number_of_arrests = n)
 
@@ -106,11 +123,13 @@ ggplot(race_per_event, aes(x=race, y=number_of_arrests)) +
   geom_bar(stat = "identity") 
 
 # Barplot of gender identity
-ggplot(gender_per_event, aes(x=sex, y=number_of_arrests)) + 
+ggplot(gender_per_event, aes(x=gender, y=number_of_arrests)) + 
   geom_bar(stat = "identity") 
 
 # Barplot of strip search against racial identity, where each racial identity of each arrest is divided into including strip search or not
 # Code referenced from https://github.com/TDonofrio62/Shooting-Occurrences-in-Toronto/blob/main/Shooting_Occurrences/outputs/paper/Shooting_Occurrences.Rmd
+
+set.seed(56)
 race_per_event |>
   ggplot(aes(x = race, y = number_of_arrests, fill = strip_search)) + 
   geom_bar(stat="identity") + 
@@ -124,12 +143,14 @@ race_per_event |>
 
 # Barplot of strip search against gender identity, where each gender identity of each arrest is divided into including strip search or not
 # Code referenced from https://github.com/TDonofrio62/Shooting-Occurrences-in-Toronto/blob/main/Shooting_Occurrences/outputs/paper/Shooting_Occurrences.Rmd
+
+set.seed(56)
 gender_per_event |>
-  ggplot(aes(x = sex, y = number_of_arrests, fill = strip_search)) + 
+  ggplot(aes(x = gender, y = number_of_arrests, fill = strip_search)) + 
   geom_bar(stat="identity") + 
   theme_minimal() +
   theme(legend.key.size = unit(0.5, 'cm')) +
-  labs(x = "Sex",
+  labs(x = "Gender",
        y = "Number of Arrests",
       fill = "Strip Search"
     ) +
@@ -157,7 +178,7 @@ simulated_data |>
 simulated_data$race |> unique() |> length() == 9
 
 # Check that there are exactly 3 gender identities identified #
-simulated_data$sex |> unique() |> length() == 3
+simulated_data$gender |> unique() |> length() == 3
 
 # Check that there are exactly 2 options for strip searches #
 simulated_data$strip_search |> unique() |> length() == 2

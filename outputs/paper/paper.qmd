@@ -261,7 +261,7 @@ cleaned_search_reasons_data |>
 #colour the points based on the perceived race of the captive
 #code for geom_point() referenced from https://github.com/TDonofrio62/Shooting-Occurrences-in-Toronto/blob/main/Shooting_Occurrences/outputs/paper/Shooting_Occurrences.Rmd
 cleaned_search_reasons_data |>
-  group_by(total_reasons, items_found, race) |>
+  group_by(total_reasons, race) |>
   count() |>
   rename(count = n) |>
   ggplot(aes(x = total_reasons, y = count, colour = race, size = count)) +
@@ -280,11 +280,12 @@ cleaned_search_reasons_data |>
 ```{r}
 #| echo: false
 #| message: false
+#| results: hide
 #| label: fig-reasons-gender
 #| fig-cap: Relationship Between Reasons for Strip Search and Gender in Toronto, 2020-2021
 
 cleaned_search_reasons_data |>
-  group_by(total_reasons, items_found, gender) |>
+  group_by(total_reasons, gender) |>
   count() |>
   rename(count = n) |>
   ggplot(aes(x = total_reasons, y = count, colour = gender, size = count)) +

@@ -24,7 +24,7 @@ set.seed(56) #ensure simulated data's reproducibility
 simulated_data <-
   tibble(
     #use 1 through 65276 to represent each arrest event
-    "event" = 1:65276,
+    "id" = 1:65276,
     #randomly pick a race identified from the dataset, with replacement, 65276 times
     "race" = sample(
       x = c("White", "Unknown or Legacy", "Black", "South Asian", "Indigenous", "Middle-Eastern", "Latino", "East/Southeast Asian", "None"),
@@ -182,5 +182,4 @@ simulated_data$gender |> unique() |> length() == 3
 
 # Check that there are exactly 2 options for strip searches #
 simulated_data$strip_search |> unique() |> length() == 2
-
 

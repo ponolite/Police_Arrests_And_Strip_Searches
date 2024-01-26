@@ -23,4 +23,4 @@ The repo is structured as the following:
 
 ## LLM Usage Statement
 
--   No Large Language Model (LLMs) were solicited during the writing of this paper. 
+-   No Large Language Models (LLMs) were solicited during the writing of this paper. 

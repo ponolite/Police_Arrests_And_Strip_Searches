@@ -1,4 +1,4 @@
-# Slightly Positive Correlation Between Racialization, Gendering and Police Strip Searches in the Toronto Municipal, 2020-2021
+# Positive Correlation Between Racialization, Gendering and Police Strip Searches in the Toronto Municipal, 2020-2021
 
 ## Overview of Repository
 

@@ -49,6 +49,7 @@ cleaned_search_reasons_data = read_csv(
 ```
 
 
+
 ## Introduction
 
 Recently, the Ford government has been at the forefront of public push-back in Toronto, due to their revisions of strip search laws under the Ministry of Correctional Services Act, R.S.O. 1990, c. M.22. Addressed by the Canadian Civil Liberties Association, the revisions "fall short...to ensure that prisoners are treated with basic respect" [@ontarioStripLaw]. By definition, strip search is a police enforcement, which entails removing some or all articles of clothing to visually inspect a person's private body parts and see if they harbor any items like weapons or drugs [@torontoPolice]. Surprisingly, while contended as a dehumanizing policing act, little has been done to assess strip search as a form of police power abuse in Toronto. This is especially relevant considering the city's racialized and gendered demographics [@ethnicCensus; @genderCensus], how strip searches most likely affect these social groups under the subtext of COVID-19 from 2020 to 2021 [@stripSearchOpEd]. 
@@ -75,6 +76,7 @@ Most relevant to the paper are the variables on the racial and gender identities
 
 Specifically, the column 'Strip Search' signifies whether an arrest involves strip search. As for the 'Items Found' column, either a `1` or a `0` will appear in a data cell if the 'Strip Search' value of an event is a `1`. This is because the items found within a strip search is only available when a police arrest does involve strip searching. 
 
+
 ```{r}
 #| echo: false
 #| message: false
@@ -90,6 +92,7 @@ head(cleaned_race_gender_data, 6) |>
   )
 ```
 
+
 ### Reasons for Police Strip Search
 
 To further inspect the nature of each strip search, reasons for strip searching prove a vital data source. Thus, this dataset--another sub-dataset split from the orginal raw data--conveys all police arrests that involve strip searching and the reasons behind strip searching. Under close examination, the naming of individual data cells from the original, raw dataset is quite disordered, for instance, using `None` and `XX` in place of the usual `NA` to differentiate between variables. Thus, all inconsistent data cells were renamed to streamline the naming conventions and data processing later on. After renaming, the big dataset was refined into containing relevant columns ([see @tbl-cleaned_search_reasons_data]). Then, for this particular dataset, all instances of police arrests without strip searching are dropped using the `filter()` function, along with a `!is.na()` function for all `reason` variables with `NA` as their values.
@@ -97,6 +100,7 @@ To further inspect the nature of each strip search, reasons for strip searching 
 Except for "ID" variable, the four other variables in this new dataset are reasons to account for why the Toronto police force conducts strip search under certain arrests ([see @tbl-cleaned_search_reasons_data]). For instance, "Reason - Assist Escape" is for people who may have helped other suspects escape and "Reason - Possess Evidence" is for people who are suspected of harboring items like drugs or an alibi. For each "Reason" variable, if the data cell contains `0`, this means that strip search happens for other reasons beside this particular one. Vice versa, if it contains `1`, this means strip search happens because of this very reason. In addition, a new column called "Total Reasons" is added to sum  all reasons used to account for each strip search. To do this, `mutate()` is utilized, where all instances of `1` and `0` are changed into numeric with `as.numeric()` and then summed together.
 
 \newpage
+
 
 ```{r}
 #| echo: false
@@ -115,11 +119,13 @@ Except for "ID" variable, the four other variables in this new dataset are reaso
   kable_styling(latex_options="scale_down")
 ```
 
+
 ## Results
 
 ### Racialized Police Strip Searches Statistics 
 
 To encapsulate, throughout 2020 and 2021, there are a total of 7801 recorded strip searches out of 65276 incidents of police arrests, which accounts for a whooping 12% of all arrests (see [@tbl-items-strip-search]). Excluding those whose racial identities are unknown and non-existent, by percentage, the three most affected racial groups are, in descending order, of Indigenous, black and white background, standing at 16%, 14% and 13% each (see [@tbl-race-strip-search]). 
+
 
 
 ```{r}
@@ -142,9 +148,11 @@ cleaned_race_gender_data |>
 
 ```
 
+
 Particularly, accounting for the discrepancies between counts of strip search grouped by different racial and gender identities are challenging. This is due to the incongruous population spread of each racial and gender group within Toronto. For instance, 44.3% of Toronto population is made up of white people [@ethnicCensus], thus it's more probable that the people arrested and strip searched by the police force are ethnically "White" in the dataset (see [@tbl-race-strip-search]). As such, to render the data statistically proportionate to one another, `mutate()`was used to create new variables that are mostly percentage values. 
 
 Then, @fig-race-strip-search illustrates the percentage of strip searches among different racial groups in Toronto from 2020-2021. Observably, while being the the major population group in Toronto, people of white racial roots aren't the most strip searched. Rather, it's the racialized population of Toronto like black and Indigenous people that are being strip searched by police. This hints at the possibility of strip search being more racialized than it seems, targeting minority groups in Toronto due to racial biases. Moreover, examining @fig-race_strip_search_separate, black people are especially overrepresented on counts of strip searches despite their small population make-up, emphasizing on the racialized nature of  police strip search in Toronto.
+
 
 ```{r fig.height = 4, fig.width = 8}
 #| echo: false
@@ -168,9 +176,11 @@ cleaned_race_gender_data |>
 
 ```
 
+
 \break
  
 ### Gendered Police Strip Searches Statistics 
+
 
 ```{r}
 #| echo: false
@@ -192,11 +202,13 @@ cleaned_race_gender_data |>
 
 ```
 
+
 Gender-wise, men are more likely to be strip searched compared to women when arrested, at 12% and 10% respectively (see [@tbl-gender-strip-search]). Though, observably, the difference is quite marginal. To note, people of unidentified gender identity aren't strip searched at all according to the dataset (denoted as `U` in the tables and graphs).
 
 @fig-gender-strip-search illustrates the percentage of gender groups being strip searched in Toronto. It's observable that the number of strip searches between men and women are comparable, especially considering the 48-52% population split between the two categories of gender in Toronto, according to the 2021 Census [@genderCensus].
 
 Nonetheless, the dataset only contains a binaristic view of gender, without regarding those who identify as non-binary or others, and essentially lumping all other gender identities as "Unidentified". This proves inconsistent against the constant public backlash agasint police for their power abuse of people belonging to the LGBTQI+ community in Toronto [@policeGender]. This point will be further discussed below.
+
 
 ```{r fig.height=3, fig.width=5}
 #| echo: false
@@ -222,6 +234,7 @@ cleaned_race_gender_data |>
 ```
 
 
+
 ### Police Strip Searches and Items Found Statistics 
 
 In general, there is a substantial 10% of strip searches being conducted without any reasons (see [@tbl-reasons-strip-search]). Commonly, strip searches are carried out by at least 1 or 2 reasons provided by the police, both at 29% (see [@tbl-reasons-strip-search]). As for items found during searches, at a whooping 63%, most strip search enforcement doesn't garner any suspected items (see [@tbl-items-strip-search]). This critically denotes how many strip searches aren't motivated by civic considerations but are moreso carried out by intuition, or personal biases that can extend to racial profiling. It signifies an alarming potential for misconducted strip searches that are racially or sexually motivated. To visualize this data, @fig-reasons-race and @fig-reasons-gender both map, respectively, the racial and gender distribution of strip searches by the total number of reasons each strip search has. 
@@ -230,6 +243,7 @@ Regarding @fig-reasons-race, due to the sheer number of police searches that peo
 
 Based on part a) of @fig-reasons-race, the number of black people who are strip searched surpass white people on all counts of total number of reasons, except for instances where the police only has one reason to conduct strip search. This again signifies an alarming rate of racialized strip searches against black people despite their small population make-up in Toronto (@ethnicCensus). For part b) of @fig-reasons-race, the percentages between other minority groups fluctuate. But intriguingly, compared to white people, all of other minority groups are more likely to be strip searched regardless of the number of reasons at hand. To note, at 11%, 11% and 10% each, people of "Middle-Eastern", "East/Southeast Asian" and "Indigenous" descent are most commonly strip searched without any provided reasons. "South Asian" in particular surpass all other racial groups when it comes to being strip searched because of 1 or 2 reasons for their actions at the time of arrest, at 34% and 35% respectively. This connotes that people of "South Asian" descent are more readily strip searched by police despite having a few reasons for their actions at the time of arrest. Speculatively, there could be a lot of racial profiling and colorism at play, considering how South Asian and black people generally have a darker skin color compared to all of the other races mentioned [@skinColor]
    
+
 ```{r fig.height=5, fig.width=8}
 #| echo: false
 #| warning: false
@@ -278,9 +292,11 @@ cleaned_search_reasons_data |>
   theme(legend.key.size = unit(0.5, 'cm')) 
 ```
 
+
 Similarly, for the plot that maps total reasons for strip searching and gender, to ensure that data is proportionate to one another, instead of using `count`, the percentages for each gender group when subdivided into each of the different sums of reasons are calculated. 
 
 Regarding @fig-reasons-gender, intriguingly, the graph calls into question of the above data confirming how males are slightly more likely to be strip searched compared to females when they're arrested. However, when intersected with data like the total number of reasons attributed strip searches, there appears to be a trend of females being more frequently strip searched when there are a smaller number of reasons--0-2 reasons--regarding their actions at the time of arrests. Specifically, this can translate to the fact that police more readily strip-search females compared to males even if the severity of their actions may not necessitate strip searching. Yet again, this hints at the potential of strip searching being sexually motivated and gendered, especially when there are mostly male police officers in Toronto [@policeStats] and where strip searching is notoriously regarded as a guise for sexual assault [@stripSearchNSW].
+
 
 ```{r fig.height=3 , fig.width=8}
 #| echo: false
@@ -307,7 +323,9 @@ cleaned_search_reasons_data |>
 ```
 
 
+
 ## Discussion
+
 
 
 
@@ -325,6 +343,7 @@ cleaned_search_reasons_data |>
   facet_wrap(~gender) + scale_fill_viridis_d(option="cividis") 
 
 ```
+
 
 ### Overview of Intersectional Insights on Strip Searching
 
@@ -361,6 +380,7 @@ Statement on LLM usage: no Learning Management Systems (LMSs) were solicited dur
 @tbl-reasons-strip-search connotes the summary statistics how many reasons the police force attributes to each person prior to conducting strip searches and the number of items found during each search. This table leverages `mutate` to create three new columns on the data's percentages and counts, enabling the data to be proprotionate to one another. "Total Reasons" conveys the total number of reasons a strip search has, while "Items Found Percentage" conveys the percentage of items found for each total of reasons. "Total Searches by Total Reasons" conveys the total number of searches for each total of reasons, while "Searches Percentage" conveys the percentage of each total of reasons out of all strip searches.
 
 
+
 ```{r}
 #| echo: false
 #| message: false
@@ -385,9 +405,11 @@ cleaned_search_reasons_data |>
   
 ```
 
+
 ### Strip Search and Items Found Correlation
 
 @tbl-items-strip-search connotes the summary statistics of all strip searches and whether or not there are items found within each strip search. 
+
 
 ```{r}
 #| echo: false
@@ -408,6 +430,8 @@ cleaned_race_gender_data |>
         )
 ```
 
+
 \newpage
 
 ## References
+

@@ -326,8 +326,11 @@ cleaned_search_reasons_data |>
 #| message: false
 #| label: fig-race-gender-search
 #| fig-cap: Racial Identities and Police Strip Search Per Arrest in Toronto, 2020-2021
+cleaned_male_female_data <-
+  cleaned_race_gender_data |>
+  filter(gender != "U")
 
-  ggplot(mapping = aes(x = race, fill = strip_search), data=cleaned_race_gender_data) +
+  ggplot(mapping = aes(x = race, fill = strip_search), data=cleaned_male_female_data) +
   geom_bar() + 
   labs(y = "Count", x = "Race", fill = "Strip Search") +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1)) +
@@ -395,6 +398,8 @@ cleaned_search_reasons_data |>
 ```
 
 ### Strip Search and Items Found Correlation
+
+@tbl-items-strip-search conveys the total number of strip searches happening in Toronto from 2020 to 2021, and whether or not items were found during each search.
 
 ```{r fig.pos="H"}
 #| echo: false

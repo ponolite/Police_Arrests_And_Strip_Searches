@@ -178,7 +178,7 @@ Gender-wise, men are more likely to be strip searched compared to women when arr
 
 \break
 
-```{r fig.pos="H"}
+```{r}
 #| echo: false
 #| message: false
 #| label: tbl-gender-strip-search
@@ -202,7 +202,7 @@ cleaned_race_gender_data |>
 
 Nonetheless, the dataset only contains a binaristic view of gender, without regarding those who identify as non-binary or others, and essentially lumping all other gender identities as "Unidentified". This proves inconsistent against the constant public backlash agasint police for their power abuse of people belonging to the LGBTQI+ community in Toronto [@policeGender]. This point will be further discussed below.
 
-```{r fig.height=3, fig.width=5}
+```{r fig.height=4, fig.width=5}
 #| echo: false
 #| message: false
 #| label: fig-gender-strip-search
@@ -233,8 +233,7 @@ In general, there is a substantial 10% of strip searches being conducted without
 #### Race and Total Reasons for Strip Searching
 
 
-
-```{r fig.width=7, fig.height=2.5, fig.pos="H"}
+```{r fig.width=7.5, fig.height=4, fig.pos="H"}
 #| echo: false
 #| warning: false
 #| message: false
@@ -265,6 +264,7 @@ cleaned_search_reasons_data |>
   theme(legend.key.size = unit(0.5, 'cm')) 
 
 
+
 cleaned_search_reasons_data |>
   filter(race != "None" & race != "Unknown or Legacy" & race != "Black") |>
   group_by(total_reasons, race) |>
@@ -293,7 +293,7 @@ Similarly, for the plot that maps "Total Reasons for Strip Searching" and "Gende
 
 Regarding @fig-reasons-gender, intriguingly, the graph calls into question of the above data confirming how males are slightly more likely to be strip searched compared to females when they're arrested. However, when intersected with data like the total number of reasons attributed to strip searches, there appears to be a trend of females being more frequently strip searched when there are a smaller number of reasons--0-2 reasons--regarding their actions at the time of arrests. Specifically, this can translate to the fact that police more readily strip-search females compared to males even if the severity of their actions may not necessitate strip searching. Yet again, this hints at the potential of strip searching being sexually motivated and gendered, especially when there are mostly male police officers in Toronto [@policeStats] and where strip searching is notoriously regarded as a guise for sexual assault [@stripSearchNSW].
 
-```{r fig.height=3 , fig.width=8}
+```{r fig.height=4.5 , fig.width=8}
 #| echo: false
 #| message: false
 #| warning: false

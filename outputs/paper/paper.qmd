@@ -82,7 +82,7 @@ Specifically, the column 'Strip Search' signifies whether an arrest involves str
 #| echo: false
 #| message: false
 #| label: tbl-cleaned_race_gender_data
-#| tbl-cap: Sample of Race and Gender Data against Police Arrests with Strip Searches
+#| tbl-cap: Sample of Race and Gender against Police Arrests with and without Strip Searches
 
 #referenced kable stying from https://github.com/EthanSansom/torontocitytrees/blob/main/outputs/paper/paper.Rmd
 head(cleaned_race_gender_data, 6) |>
@@ -104,7 +104,7 @@ Except for "ID" variable, the four other variables in this new dataset are reaso
 #| echo: false
 #| message: false
 #| label: tbl-cleaned_search_reasons_data
-#| tbl-cap: Sample of Reasons for Police Strip Searches Data
+#| tbl-cap: Sample of Reasons for Police Strip Searches
 
 
   head(cleaned_search_reasons_data, 6) |>
@@ -182,7 +182,7 @@ Gender-wise, men are more likely to be strip searched compared to women when arr
 #| echo: false
 #| message: false
 #| label: tbl-gender-strip-search
-#| tbl-cap: Summary Statistics of Gendered Police Strip Searches
+#| tbl-cap: Summary Statistics of Gender Identities against Police Strip Searches
 
 cleaned_race_gender_data |>
   group_by(gender, strip_search) |>
@@ -234,7 +234,7 @@ In general, there is a substantial 10% of strip searches being conducted without
 
 
 
-```{r fig.width=7, fig.height=3, fig.pos="H"}
+```{r fig.width=7, fig.height=2.5, fig.pos="H"}
 #| echo: false
 #| warning: false
 #| message: false
@@ -325,7 +325,7 @@ cleaned_search_reasons_data |>
 #| echo: false
 #| message: false
 #| label: fig-race-gender-search
-#| fig-cap: Racial Identities and Police Strip Search Per Arrest in Toronto, 2020-2021
+#| fig-cap: Count of Gender and Racial Identities against Police Strip Searches in Toronto
 cleaned_male_female_data <-
   cleaned_race_gender_data |>
   filter(gender != "U")
@@ -340,7 +340,7 @@ cleaned_male_female_data <-
 
 ### Overview of Intersectional Insights on Strip Searching
 
-Overall, the data unfolds the relationship between strip searching and social identities such as race and gender. Within these intersecting identities, it was found that if there is an police arrest in Toronto from 2020 to 2021, strip searching would most likely happen to an Indigenous person or a black person. This is a statistically improbable insight, considering the major population make-up of white people in Toronto and their huge counts of arrests as seen in past bar graphs (see [@fig-race-gender-search]). Out of all the minority racial groups, at 2434 people, the black population has the highest counts of strip searches. Regarding reasons accounted for each strip search, minority racial groups are more likely to be strip searched without any reason provided or with less reasons provided compared to those that are ethnically white. Gender-wise, even though arrested males prevail in terms of being strip searched (see [@fig-race-gender-search]), females are more likely to be searched with less reasons provided. These insights all substantiate the assumptions that Toronto police strip searches are racialized and gendered, which calls for a legal and political revisions of this intrusive form of policing as it hinges on racial biases, profiling, social intimidation and sexual invasion.
+Illustrated in @fig-race-gender-search, this paper aims to interogate the relationship between strip searching and social identities such as race and gender in Toronto from 2020 to 2021. Within these intersecting identities, it was found that if there is an police arrest in Toronto from 2020 to 2021, strip searching would most likely happen to an Indigenous person or a black person. This is a statistically improbable insight, considering the major population make-up of white people in Toronto and their huge counts of arrests as seen in past bar graphs (see [@fig-race-gender-search]). Out of all the minority racial groups, at 2434 people, the black population has the highest counts of strip searches. Regarding reasons accounted for each strip search, minority racial groups are more likely to be strip searched without any reason provided or with less reasons provided compared to those that are ethnically white. Gender-wise, even though arrested males prevail in terms of being strip searched (see [@fig-race-gender-search]), females are more likely to be searched with less reasons provided. These insights all substantiate the assumptions that Toronto police strip searches are racialized and gendered, which calls for a legal and political revisions of this intrusive form of policing as it hinges on racial biases, profiling, social intimidation and sexual invasion.
 
 ### Loopholes and Weaknesses
 

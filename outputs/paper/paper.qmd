@@ -85,7 +85,7 @@ Specifically, the column 'Strip Search' signifies whether an arrest involves str
 #| tbl-cap: Sample of Race and Gender against Police Arrests with and without Strip Searches
 
 #referenced kable stying from https://github.com/EthanSansom/torontocitytrees/blob/main/outputs/paper/paper.Rmd
-head(cleaned_race_gender_data, 6) |>
+head(cleaned_race_gender_data, 10) |>
   kable(
     col.names = c("ID", "Race", "Gender", "Strip Search", "Items Found"),
     booktabs = TRUE,
@@ -107,10 +107,10 @@ Except for "ID" variable, the four other variables in this new dataset are reaso
 #| tbl-cap: Sample of Reasons for Police Strip Searches
 
 
-  head(cleaned_search_reasons_data, 6) |>
+  head(cleaned_search_reasons_data, 10) |>
   select(-c(race, gender)) |>
   kable(
-    col.names = c("ID", "Reason - Injury", "Reason - Escape", "Reason - Weapons", "Reason - Has Evidence", "Items_Found", "Total Reasons"),
+    col.names = c("ID", "Reason - Injury", "Reason - Escape", "Reason - Weapons", "Reason - Has Evidence", "Items Found", "Total Reasons"),
     booktabs = TRUE,
     align = c("c", "c", "c", "c", "c", "c", "c")
   ) |>
@@ -145,7 +145,7 @@ cleaned_race_gender_data |>
 
 ```
 
-Particularly, accounting for the discrepancies between counts of strip search grouped by different racial and gender identities are challenging. This is due to the incongruous population spread of each racial and gender group within Toronto. For instance, 44.3% of Toronto population is made up of white people [@ethnicCensus], thus it's more probable that the people arrested and strip searched by the police force are ethnically "White" in the dataset (see [@tbl-race-strip-search]). As such, to render the data statistically proportionate to one another, `mutate()`was used to create new variables that are mostly percentage values. 
+Particularly, accounting for the discrepancies between counts of strip search grouped by different racial and gender identities are challenging. This is due to the incongruous population spread of each racial and gender group within Toronto. For instance, 44.3% of Toronto population is made up of white people [@ethnicCensus], thus it's more probable that the people arrested and strip searched by the police force are ethnically white in the dataset (see [@tbl-race-strip-search]). As such, to render the data statistically proportionate to one another, `mutate()`was used to create new columns of mostly percentage values, relating each racial and gender group to the variable being measured at hand
 
 Then, @fig-race-strip-search illustrates the percentage of strip searches among different racial groups in Toronto from 2020-2021. Observably, while being the the major population group in Toronto, people of white racial roots aren't the most strip searched. Rather, it's the racialized population of Toronto like black and Indigenous people that are being strip searched by police, at respectively, 16% and 14% each. This hints at the possibility of strip search being more racialized than it seems, targeting minority groups in Toronto due to racial biases. Moreover, examining tbl-race-strip-search, 2434 out of 17526 black people are strip searched in Toronto from 2020 to 2021, making them overrepresented despite their small population make-up. Once more, this emboldens the racialized nature of police strip search.
 

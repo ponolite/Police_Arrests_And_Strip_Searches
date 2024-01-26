@@ -64,7 +64,7 @@ This paper is organized into the following sections: Data, Results and Discussio
 
 ## Data
 
-The data package used for analysis was sourced from the Open Data Toronto Portal under the library `opendatatoronto` [@rOpenDataToronto]. Only one dataset was retrieved from the data package to examine the racial and gender identities of Toronto police arrests from 2020 to 2021, which is the package `Police Race and Identity Based Data - Arrests and Strip Searches` [@torontoPolice]. Data was generated, extracted and cleaned using the open-source statistical programming language R [@r], leveraging functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `dplyr` [@rDplyr], `readr` [@rReadr], `tibble` [@rTibble], `here` [@rHere], `ggrepel` [@rGgrepel], janitor` [@rJanitor], `kableExtra` [@rKableExtra], `naniar` [@rNaniar] and `knitr` [@rKnitr].
+The data package used for analysis was sourced from the Open Data Toronto Portal under the library `opendatatoronto` [@rOpenDataToronto]. Only one dataset was retrieved from the data package to examine the racial and gender identities of Toronto police arrests from 2020 to 2021, which is the package `Police Race and Identity Based Data - Arrests and Strip Searches` [@torontoPolice]. Data was generated, extracted and cleaned using the open-source statistical programming language R [@r], leveraging functions from `tidyverse` [@rTidyverse], `ggplot2` [@rGgplot2], `dplyr` [@rDplyr], `readr` [@rReadr], `tibble` [@rTibble], `here` [@rHere], `ggrepel` [@rGgrepel], `janitor` [@rJanitor], `kableExtra` [@rKableExtra], `naniar` [@rNaniar], and `knitr` [@rKnitr].
 
 ### Overview of "Police Race and Identity Based Data - Arrests and Strip Searches"
 

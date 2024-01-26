@@ -202,7 +202,7 @@ cleaned_race_gender_data |>
 
 Nonetheless, the dataset only contains a binaristic view of gender, without regarding those who identify as non-binary or others, and essentially lumping all other gender identities as "Unidentified". This proves inconsistent against the constant public backlash agasint police for their power abuse of people belonging to the LGBTQI+ community in Toronto [@policeGender]; this point will be further discussed below.
 
-```{r fig.height=4, fig.width=5}
+```{r fig.height=4, fig.width=5, fig.align='center'}
 #| echo: false
 #| message: false
 #| label: fig-gender-strip-search

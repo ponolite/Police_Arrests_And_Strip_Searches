@@ -76,7 +76,7 @@ Informative as it is, the dataset contains much naming inconsistency and many va
 
 Most relevant to the paper are the variables on the racial and gender identities of people who were arrested and then strip-searched. After having their names simplified, this subset of data from the original dataset was generated, containing relevant columns on the social identities of people invovled in strip search ([see @tbl-cleaned_race_gender_data]).This dataset entails demographic and strip search-relevant information for each police arrest event, such as race, gender, whether the event involves a strip search, and any items found during serach. There are 9 unique racial groups for the `race` variables and 3 unique gender groups for the `gender` variables
 
-Specifically, the column 'Strip Search' signifies whether an arrest involves strip searching. As for the 'Items Found' column, either a `1` or a `0` will appear in a data cell if the 'Strip Search' value of an event is a `1`. This is because the items found within a strip search is only available when a police arrest does involve strip searching. 
+Specifically, the column "Strip Search" signifies whether an arrest involves strip searching. As for the "Items Found" column, either a `1` or a `0` will appear in a data cell if the "Strip Search" value of an event is a `1`. This is because the items found within a strip search is only available when a police arrest does involve strip searching. 
 
 ```{r}
 #| echo: false
